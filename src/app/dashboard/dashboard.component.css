@@ -1,3 +1,28 @@
 .widget {
+    background-color: #3D3D3D;
+    width:200px;
+    height: 200px;
+    color:white;
+    margin:10px;
+    float:left;
     
+}
+
+.widget h4 {
+    margin-top: 0;
+}
+
+.widget .caption {
+    padding: 10px 10px 0px 10px;
+    border-bottom: 1px dashed #222;
+}
+.widget .content {
+    text-align: center;
+    padding-top: 20px;
+}
+.widget .content p {
+    font-size:25px;
+}
+.widget .content .fa {
+    color: rgb(178,200,46);
 }
