@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Piscine } from './piscine.model';
+import { PiscineService } from './piscine.service';
 
 @Component({
   selector: 'app-piscine',
@@ -6,10 +8,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./piscine.component.css']
 })
 export class PiscineComponent implements OnInit {
-
-  constructor() { }
+  piscineData: Piscine  = new Piscine();
+  constructor(private piscineService: PiscineService) { }
 
   ngOnInit() {
+    this.piscineService.getPiscine().then(piscine => this.piscineData = piscine);
   }
 
 }
