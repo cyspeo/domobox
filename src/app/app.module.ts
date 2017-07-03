@@ -5,17 +5,24 @@ import { HttpModule } from '@angular/http';
 import { AppRoutingModule } from './app-routing/app-routing.module';
 
 import { AppComponent } from './app.component';
-import { PiscineService } from './piscine/piscine.service';
 import { DashboardComponent } from './dashboard/dashboard.component';
+//Piscine
+import { PiscineService } from './piscine/piscine.service';
 import { PiscineComponent } from './piscine/piscine.component';
 import { PiscineWidgetComponent } from './piscine/piscine-widget.component';
+//Meteo
+import { MeteoService } from './meteo/meteo.service';
+import { MeteoPageComponent } from './meteo/meteo-page.component';
+import { MeteoWidgetComponent } from './meteo/meteo-widget.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
     PiscineComponent,
-    PiscineWidgetComponent
+    PiscineWidgetComponent,
+    MeteoPageComponent,
+    MeteoWidgetComponent
   ],
   imports: [
     BrowserModule,
@@ -23,7 +30,7 @@ import { PiscineWidgetComponent } from './piscine/piscine-widget.component';
     HttpModule,
     AppRoutingModule
   ],
-  providers: [PiscineService],
+  providers: [PiscineService, MeteoService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
