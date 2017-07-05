@@ -24,6 +24,10 @@ export class MeteoPageComponent implements OnInit {
     this.meteoOperation = this.meteoService.getMeteo("toulouse");
     this.meteoOperation.subscribe(meteo => {
       this.meteoData.icon_big = meteo.current_condition.icon_big;
+      this.meteoData.tmp = meteo.current_condition.tmp;
+      this.meteoData.tmin = meteo.fcst_day_0.tmin;
+      this.meteoData.tmax = meteo.fcst_day_0.tmax;
+      this.meteoData.condition = meteo.current_condition.condition;
       console.log("meteo ok: " + this.meteoData.icon_big);
     }, err => {
       console.log(err);

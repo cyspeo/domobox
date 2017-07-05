@@ -8,9 +8,6 @@ import { Meteo } from './meteo.model';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
-const DATA_METEO: Meteo = {
-  icon_big: "http://www.prevision-meteo.ch/style/images/icon/faibles-passages-nuageux-big.png"
-};
 
 @Injectable()
 export class MeteoService {
