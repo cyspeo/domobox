@@ -51,3 +51,19 @@ body {
 .thumbnail .content .fa {
     color: rgb(178,200,46);
 }
+
+
+
+/*Panel*/
+.panel {
+    border-radius: 0;
+    box-shadow: none;
+    background-color: #3D3D3D;
+    color:white;
+    border-width:0;
+}
+.panel-default>.panel-heading {
+    color: white;;
+    background-color: #3D3D3D;
+    border-bottom: 1px dashed #222;
+}

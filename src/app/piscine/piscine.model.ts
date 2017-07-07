@@ -6,7 +6,13 @@ export class Secteur {
   nombre:string;
   x:number;
   y:number;
-  constructor(n) {
+  angle: number;
+  constructor(n,angle) {
     this.nombre = n;
+    this.angle = angle;
   }
+}
+
+export class Programmation {
+  topics: Array<boolean> = [];
 }
