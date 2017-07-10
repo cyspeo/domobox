@@ -1,3 +1,19 @@
+.nav-piscine {
+    position:fixed;
+    top:0;
+    width: 100%;
+}
+
+.floating-action {
+    position: fixed;
+    bottom: 50px;
+    right: 50px;
+    z-index:1030;
+    border-radius: 50%;
+    background-color:  rgb(178,200,46);
+    box-shadow: 0 3px 6px rgba(255, 255, 255, 0.16), 0 3px 6px rgba(255, 255, 255, 0.23);
+}
+
 .page-piscine {
     color:white;
 }

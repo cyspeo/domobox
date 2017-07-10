@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
+
+import {CanComponentDeactivate} from '../app-routing/can-deactivate-guard.service';
 import { Piscine } from './piscine.model';
 import { Secteur } from './piscine.model';
 import { Programmation } from './piscine.model';
@@ -10,12 +13,16 @@ import { PiscineService } from './piscine.service';
   templateUrl: './piscine.component.html',
   styleUrls: ['./piscine.component.css']
 })
-export class PiscineComponent implements OnInit {
+export class PiscineComponent implements OnInit,CanComponentDeactivate {
   piscineData: Piscine = new Piscine();
   secteurs: Array<Secteur>;
-  prog: Programmation;
+  prog: Programmation;  
+  editable:boolean;  
+  dirty:boolean; // indique si les données ont été changée.
 
-  constructor(private piscineService: PiscineService) {
+  constructor(private piscineService: PiscineService, private location: Location ) {
+    this.editable = false;
+    this.dirty = false;
     this.secteurs = new Array<Secteur>();
     let alpha = 2*Math.PI / 12;
     let ray = 150;
@@ -28,10 +35,25 @@ export class PiscineComponent implements OnInit {
     }
     this.prog = this.piscineService.getProgrammation();
 
+    
+  }
+
+
+   canDeactivate(): Promise<boolean> | boolean {
+     console.log("component candeactive");
+    // Allow synchronous navigation (`true`) if no crisis or the crisis is unchanged
+    if (this.dirty) {
+      return window.confirm('Discard changes?');
+    } else {
+      return true;
+    }
   }
 
   togglePlageHoraire(h:number) {
-    this.prog.topics[h] = !this.prog.topics[h];
+    if (this.editable) {
+      this.dirty = true;
+      this.prog.topics[h] = !this.prog.topics[h];
+    }
   }
   getClass(i:number) {
     if (this.prog.topics[i]) {
@@ -46,6 +68,15 @@ export class PiscineComponent implements OnInit {
       }
     }
     return total;
+  }
+
+  setEditable() {
+    this.editable = true;
+  }
+  //Mise à jour des données de programmation de la pompe
+  validate() {
+    this.piscineService.update(this.prog);
+    this.editable = false;
   }
   ngOnInit() {
     this.piscineService.getPiscine().then(piscine => this.piscineData = piscine);
