@@ -10,15 +10,13 @@ const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
   { path: 'dashboard',  component: DashboardComponent },
   { path: 'piscine',  component: PiscineComponent,
-    canDeactivate: ['CanDeactivateGuard'] }
+    canDeactivate: [CanDeactivateGuard] }
 ];
 
 @NgModule({
   imports: [ RouterModule.forRoot(routes) ],
   exports: [ RouterModule ],
-  providers: [
-    CanDeactivateGuard
-  ]
+  providers: [CanDeactivateGuard]
 })
 
 export class AppRoutingModule { }

@@ -1,6 +1,6 @@
 <nav class="navbar navbar-inverse navbar-fixed-top">
   <div class="navbar-header pull-left">
-      <a class="navbar-brand" href="#/dashboard"><span class="fa fa-arrow-left"></span></a>
+      <a class="navbar-brand" routerLink="/dashboard" routerLinkActive="active"><span class="fa fa-arrow-left"></span></a>
       <p class="navbar-brand ">Plages horaires : {{ getTotalHeure() }} h/jour</p>
     </div>
     <div class="navbar-header pull-right">
@@ -8,8 +8,9 @@
     </div>
 </nav>
 
-<button *ngIf="!editable" (click)="setEditable()" class="btn floating-action"><span class="fa fa-pencil"></span></button>
-<button *ngIf="editable" (click)="validate()" class="btn floating-action"><span class="fa fa-check"></span></button>
+<button [@btnState]="state" (click)="clicAction()" class="btn floating-action"><span class="fa fa-pencil" 
+[ngClass]="{'fa-pencil':!editable, 'fa-check':editable}"></span></button>
+<!--<button *ngIf="editable"  (click)="validate()" class="btn floating-action"><span class="fa fa-check"></span></button>-->
 <div class="page-piscine container-fluid">
  
   <div class="row">
@@ -21,9 +22,9 @@
               text-anchor="middle" dy=".3em">AM</text>
           <g *ngFor="let item of secteurs; let i = index" (click)="togglePlageHoraire(i)">
             <circle fill="#3D3D3D" stroke="#fff" stroke-width="1" stroke-miterlimit="10" [attr.cx]="200+item.x" [attr.cy]="200-item.y"
-              r="20" opacity="0.6" />
+              r="25" opacity="0.6" />
 
-            <text [ngClass]="{'heure-active':prog.topics[i]}" font-size="18px" [attr.x]="200+item.x" [attr.y]="200-item.y" fill="#fff"
+            <text [ngClass]="{'heure-active':prog.topics[i]}" font-size="22px" [attr.x]="200+item.x" [attr.y]="200-item.y" fill="#fff"
               text-anchor="middle" dy=".3em">{{i}}</text>
 
           </g>
@@ -39,9 +40,9 @@
               text-anchor="middle" dy=".3em">PM</text>
           <g *ngFor="let item of secteurs; let i = index" (click)="togglePlageHoraire(i+12)">
             <circle fill="#3D3D3D" stroke="#fff" stroke-width="1" stroke-miterlimit="10" [attr.cx]="200+item.x" [attr.cy]="200-item.y"
-              r="20" opacity="0.6" />
+              r="25" opacity="0.6" />
 
-            <text [ngClass]="{'heure-active':prog.topics[i+12]}" font-size="18px" [attr.x]="200+item.x" [attr.y]="200-item.y" fill="#fff"
+            <text [ngClass]="{'heure-active':prog.topics[i+12]}" font-size="22px" [attr.x]="200+item.x" [attr.y]="200-item.y" fill="#fff"
               text-anchor="middle" dy=".3em">{{i+12}}</text>
 
           </g>
@@ -49,8 +50,5 @@
 
       </div>
     </div>
-    <h5>Pompes actives {{ getTotalHeure() }} par jour </h5>
-
-
   </div>
 </div>
