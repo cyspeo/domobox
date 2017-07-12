@@ -24,7 +24,7 @@
             <circle fill="#3D3D3D" stroke="#fff" stroke-width="1" stroke-miterlimit="10" [attr.cx]="200+item.x" [attr.cy]="200-item.y"
               r="25" opacity="0.6" />
 
-            <text [ngClass]="{'heure-active':prog.topics[i]}" font-size="22px" [attr.x]="200+item.x" [attr.y]="200-item.y" fill="#fff"
+            <text [ngClass]="{'heure-active':prog.plagesHoraires[i]}" font-size="22px" [attr.x]="200+item.x" [attr.y]="200-item.y" fill="#fff"
               text-anchor="middle" dy=".3em">{{i}}</text>
 
           </g>
@@ -42,7 +42,7 @@
             <circle fill="#3D3D3D" stroke="#fff" stroke-width="1" stroke-miterlimit="10" [attr.cx]="200+item.x" [attr.cy]="200-item.y"
               r="25" opacity="0.6" />
 
-            <text [ngClass]="{'heure-active':prog.topics[i+12]}" font-size="22px" [attr.x]="200+item.x" [attr.y]="200-item.y" fill="#fff"
+            <text [ngClass]="{'heure-active':prog.plagesHoraires[i+12]}" font-size="22px" [attr.x]="200+item.x" [attr.y]="200-item.y" fill="#fff"
               text-anchor="middle" dy=".3em">{{i+12}}</text>
 
           </g>

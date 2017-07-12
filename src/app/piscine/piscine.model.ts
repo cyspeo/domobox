@@ -14,5 +14,11 @@ export class Secteur {
 }
 
 export class Programmation {
-  topics: Array<boolean> = [];
+  plagesHoraires: Array<boolean> = [];
+  relais: boolean;
+  constructor() {
+    for (var i = 0; i < 24; i++) {
+     this.plagesHoraires[i] = false;
+    };
+  }
 }

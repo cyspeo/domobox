@@ -50,6 +50,7 @@ export class PiscineComponent implements OnInit {
   editable: boolean;
   state: string;
   dirty: boolean; // indique si les données ont été changée.
+  errorMessage: any;
 
   constructor(private piscineService: PiscineService, private location: Location) {
     this.editable = false;
@@ -65,7 +66,13 @@ export class PiscineComponent implements OnInit {
       secteur.y = ray * Math.sin(alphaI);
       this.secteurs.push(secteur);
     }
-    this.prog = this.piscineService.getProgrammation();
+    this.prog = new Programmation();
+    this.piscineService.getProgrammation()
+      .subscribe(response => {
+        this.prog = response;
+        console.log("response  " + JSON.stringify(response))
+      },
+      error => this.errorMessage = <any>error);
 
 
   }
@@ -84,24 +91,24 @@ export class PiscineComponent implements OnInit {
   togglePlageHoraire(h: number) {
     if (this.editable) {
       this.dirty = true;
-      this.prog.topics[h] = !this.prog.topics[h];
+      this.prog.plagesHoraires[h] = !this.prog.plagesHoraires[h];
     }
   }
   getClass(i: number) {
-    if (this.prog.topics[i]) {
+    if (this.prog.plagesHoraires[i]) {
       return "active"
     }
   }
   getTotalHeure() {
     var total = 0;
-    for (var item of this.prog.topics) {
+    for (var item of this.prog.plagesHoraires) {
       if (item) {
         total++;
       }
     }
     return total;
   }
-// Passage du mode consultation à edition et inversemment
+  // Passage du mode consultation à edition et inversemment
   clicAction() {
     if (!this.editable) {
       this.editable = true;
@@ -114,6 +121,15 @@ export class PiscineComponent implements OnInit {
   }
   //Mise à jour des données de programmation de la pompe
   validate() {
+    if (this.prog) {
+      this.piscineService.update(this.prog)
+        .subscribe(response => {
+          this.prog = response
+          //console.log("response  " + JSON.stringify(response))
+        },
+        error => this.errorMessage = <any>error);
+    }
+
     this.piscineService.update(this.prog);
     this.editable = false;
     this.state = 'inactive';

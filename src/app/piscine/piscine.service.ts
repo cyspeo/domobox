@@ -2,48 +2,55 @@ import { Injectable } from '@angular/core';
 import { Piscine } from './piscine.model';
 import { Programmation } from './piscine.model';
 
-const DATA_PISCINE: Piscine = { waterTmp: 25};
+import { Http, Response } from '@angular/http';
+import { Headers, RequestOptions } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/map';
+
+
+const DATA_PISCINE: Piscine = { waterTmp: 25 };
 
 @Injectable()
 export class PiscineService {
 
-  constructor() { }
+  private programmationUrl = 'http://localhost:3001/api/piscine/programmation';  // URL to web API
+  constructor(private http: Http) { }
 
-  getPiscine() : Promise<Piscine> {
-      console.log("datapiscine="+ DATA_PISCINE);
-      return Promise.resolve(DATA_PISCINE);
+  getPiscine(): Promise<Piscine> {
+    console.log("datapiscine=" + DATA_PISCINE);
+    return Promise.resolve(DATA_PISCINE);
+  }
+  getProgrammation(): Observable<Programmation> {
+    return this.http.get(this.programmationUrl)
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
+  private extractData(res: Response) {
+    let body = res.json();
+    return body || {};
   }
 
-  getProgrammation() {
-    var prog = new Programmation();
-    prog.topics[0] = true;
-    prog.topics[1] = true;
-    prog.topics[2] = true;
-    prog.topics[3] = true;
-    prog.topics[4] = true;
-    prog.topics[5] = true;
-    prog.topics[6] = true;
-    prog.topics[7] = true;
-    prog.topics[8] = false;
-    prog.topics[9] = true;
-    prog.topics[10] = false;
-    prog.topics[11] = false;
-    prog.topics[12] = false;
-    prog.topics[13] = false;
-    prog.topics[14] = false;
-    prog.topics[15] = false;
-    prog.topics[16] = false;
-    prog.topics[17] = true;
-    prog.topics[18] = true;
-    prog.topics[19] = true;
-    prog.topics[20] = true;
-    prog.topics[21] = true;
-    prog.topics[22] = true;
-    prog.topics[23] = true;
-    return prog;
+  private handleError(error: Response | any) {
+    // In a real world app, you might use a remote logging infrastructure
+    let errMsg: string;
+    if (error instanceof Response) {
+      const body = error.json() || '';
+      const err = body.error || JSON.stringify(body);
+      errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
+    } else {
+      errMsg = error.message ? error.message : error.toString();
+    }
+    console.error(errMsg);
+    return Observable.throw(errMsg);
   }
 
-  update(prog : Programmation) {
+  update(prog: Programmation) {
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
 
+    return this.http.post(this.programmationUrl, prog, options)
+      .map(this.extractData)
+      .catch(this.handleError);
   }
 }
