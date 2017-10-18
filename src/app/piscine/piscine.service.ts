@@ -15,13 +15,16 @@ const DATA_PISCINE: Piscine = { waterTmp: 25 };
 export class PiscineService {
 
   private programmationUrl = 'http://localhost:3001/api/piscine/programmation';  // URL to web API
-  constructor(private http: Http) { }
+  constructor(private http: Http) {
+    //TODO set Authorization headers properties : 'Basic ' + new Buffer("toto:titi").toString('base64');
+  }
 
   getPiscine(): Promise<Piscine> {
     console.log("datapiscine=" + DATA_PISCINE);
     return Promise.resolve(DATA_PISCINE);
   }
   getProgrammation(): Observable<Programmation> {
+    
     return this.http.get(this.programmationUrl)
       .map(this.extractData)
       .catch(this.handleError);
