@@ -16,6 +16,7 @@ import { PiscineWidgetComponent } from './piscine/piscine-widget.component';
 import { MeteoService } from './meteo/meteo.service';
 import { MeteoPageComponent } from './meteo/meteo-page.component';
 import { MeteoWidgetComponent } from './meteo/meteo-widget.component';
+import { ParamComponent } from './param/param.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { MeteoWidgetComponent } from './meteo/meteo-widget.component';
     PiscineComponent,
     PiscineWidgetComponent,
     MeteoPageComponent,
-    MeteoWidgetComponent
+    MeteoWidgetComponent,
+    ParamComponent
   ],
   imports: [
     BrowserModule,

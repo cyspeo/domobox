@@ -5,12 +5,13 @@ import { CanDeactivateGuard }       from './can-deactivate-guard.service';
 import { CommonModule } from '@angular/common';
 import { DashboardComponent } from '../dashboard/dashboard.component';
 import { PiscineComponent } from '../piscine/piscine.component';
+import { ParamComponent } from '../param/param.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
   { path: 'dashboard',  component: DashboardComponent },
-  { path: 'piscine',  component: PiscineComponent,
-    canDeactivate: [CanDeactivateGuard] }
+  { path: 'piscine',  component: PiscineComponent, canDeactivate: [CanDeactivateGuard] },
+  { path: 'param', component: ParamComponent }
 ];
 
 @NgModule({

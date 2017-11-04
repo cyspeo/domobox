@@ -14,15 +14,25 @@ const DATA_PISCINE: Piscine = { waterTmp: 25 };
 @Injectable()
 export class PiscineService {
 
-  private programmationUrl = 'http://localhost:3001/api/piscine/programmation';  // URL to web API
-  constructor(private http: Http) { }
+  //private programmationUrl = 'http://localhost:3001/api/piscine/programmation';  // URL to web API
+  private programmationUrl =  '';
+  private headers : Headers;
+  private options : RequestOptions;
+  constructor(private http: Http) {
+    //TODO set Authorization headers properties : 'Basic ' + new Buffer("toto:titi").toString('base64');
+    this.programmationUrl = localStorage.getItem("urlServer") || '';
+    this.headers = new Headers({ 'Content-Type': 'application/json' });
+    this.headers.append('Authorization', 'Basic ' + btoa('toto:titi'));   
+    this.options = new RequestOptions({ headers: this.headers });
+  }
 
   getPiscine(): Promise<Piscine> {
     console.log("datapiscine=" + DATA_PISCINE);
     return Promise.resolve(DATA_PISCINE);
   }
   getProgrammation(): Observable<Programmation> {
-    return this.http.get(this.programmationUrl)
+    
+    return this.http.get(this.programmationUrl,this.options)
       .map(this.extractData)
       .catch(this.handleError);
   }
@@ -46,10 +56,7 @@ export class PiscineService {
   }
 
   update(prog: Programmation) {
-    let headers = new Headers({ 'Content-Type': 'application/json' });
-    let options = new RequestOptions({ headers: headers });
-
-    return this.http.post(this.programmationUrl, prog, options)
+    return this.http.post(this.programmationUrl, prog, this.options)
       .map(this.extractData)
       .catch(this.handleError);
   }
