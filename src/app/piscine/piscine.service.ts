@@ -21,8 +21,9 @@ export class PiscineService {
   constructor(private http: Http) {
     //TODO set Authorization headers properties : 'Basic ' + new Buffer("toto:titi").toString('base64');
     this.programmationUrl = localStorage.getItem("urlServer") || '';
-    this.headers = new Headers({ 'Content-Type': 'application/json' });
-    this.headers.append('Authorization', 'Basic ' + btoa('toto:titi'));   
+    //this.headers = new Headers({ 'Content-Type': 'application/json' });
+    this.headers = new Headers({'Content-Type': 'application/x-www-form-urlencoded'});
+    this.headers.append('Authorization', 'Basic ' + btoa('domobox:domoboxpw'));   
     this.options = new RequestOptions({ headers: this.headers });
   }
 

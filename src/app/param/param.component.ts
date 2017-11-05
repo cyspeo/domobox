@@ -18,6 +18,7 @@ export class ParamComponent implements OnInit {
 
   ngOnInit() {
     //this.urlServer = "http://145.239.73.63:3001/api/piscine/programmation";
+    this.urlServer = "http://localhost:3001/api/piscine/programmation";
     this.userName = "domobox";
     this.password = "domoboxpw";
   }
