@@ -1,0 +1,12 @@
+a:not([href]):not([tabindex]) {
+    color:white;
+}
+.list-group-item {
+    background-color: black;   
+    border-color:rgba(125,125,125,0.125);
+}
+
+.list-group-item p {
+    color:grey;
+    
+}

@@ -1,11 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~font-awesome/css/font-awesome.css';
-@import "./customBootstrap/css/bootstrap.min.css";
+/*@import "./customBootstrap/css/bootstrap.min.css";*/
+@import "~bootstrap/dist/css/bootstrap.css";
 
 body {
     background-color:#222;
 }
-
+body.container-fluid {
+    padding-left: 0;
+    padding-right: 0;
+}
 
 .dummy {
     margin-top:80%;
@@ -66,4 +70,14 @@ body {
     color: white;;
     background-color: #3D3D3D;
     border-bottom: 1px dashed #222;
+}
+
+
+.page-piscine .list-group-item:first-child {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+.page-piscine .list-group-item:last-child {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
 }

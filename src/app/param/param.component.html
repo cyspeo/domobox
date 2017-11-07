@@ -1,17 +1,17 @@
-<div class="page-piscine container-fluid">
+<div class="page-piscine ">
   <div class="row">
-    <div class="col-xs-12 col-sm-6 col-md-6">
+    <div class="col-12">
       <div class="list-group">
-        <a href="" class="list-group-item ">
-          <h4 class="list-group-item-heading">url serveur</h4>
+        <a  class="list-group-item " (click)="editParam(urlServer,'urlServer')">
+          <h5 class="list-group-item-heading">url serveur</h5>
           <p class="list-group-item-text">{{urlServer}}</p>
         </a>
-        <a href="#" class="list-group-item ">
-          <h4 class="list-group-item-heading">Username</h4>
+        <a  class="list-group-item" (click)="editParam(userName,'userName')">
+          <h5 class="list-group-item-heading">Username</h5>
           <p class="list-group-item-text">{{userName}}</p>
         </a>
-        <a href="#" class="list-group-item ">
-          <h4 class="list-group-item-heading">Password</h4>
+        <a  class="list-group-item" (click)="editParam(password,'password')">
+          <h5 class="list-group-item-heading">Password</h5>
           <p class="list-group-item-text">{{password}}</p>
         </a>
       </div>

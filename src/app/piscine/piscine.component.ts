@@ -70,7 +70,7 @@ export class PiscineComponent implements OnInit {
     this.piscineService.getProgrammation()
       .subscribe(response => {
         this.prog = response;
-        console.log("response  " + JSON.stringify(response))
+        //console.log("response  " + JSON.stringify(response))
       },
       error => this.errorMessage = <any>error);
 
@@ -79,10 +79,10 @@ export class PiscineComponent implements OnInit {
 
 
   canDeactivate(): Promise<boolean> | boolean {
-    console.log("component candeactive");
+    //console.log("component candeactive");
     // Allow synchronous navigation (`true`) if no crisis or the crisis is unchanged
     if (this.dirty) {
-      return window.confirm('Discard changes?');
+      return window.confirm('Discard changes?');      
     } else {
       return true;
     }
@@ -130,14 +130,13 @@ export class PiscineComponent implements OnInit {
         error => this.errorMessage = <any>error);
     }
 
-    this.piscineService.update(this.prog);
+    //this.piscineService.update(this.prog);
     this.editable = false;
     this.state = 'inactive';
     this.dirty = false;
   }
   ngOnInit() {
-    this.piscineService.getPiscine().then(piscine => this.piscineData = piscine);
-
+    
   }
 
 }

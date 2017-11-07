@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Piscine } from './piscine.model';
-import { Programmation } from './piscine.model';
+import { Piscine, Programmation } from './piscine.model';
 
 import { Http, Response } from '@angular/http';
 import { Headers, RequestOptions } from '@angular/http';
@@ -9,7 +8,7 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 
 
-const DATA_PISCINE: Piscine = { waterTmp: 25 };
+
 
 @Injectable()
 export class PiscineService {
@@ -21,16 +20,12 @@ export class PiscineService {
   constructor(private http: Http) {
     //TODO set Authorization headers properties : 'Basic ' + new Buffer("toto:titi").toString('base64');
     this.programmationUrl = localStorage.getItem("urlServer") || '';
-    //this.headers = new Headers({ 'Content-Type': 'application/json' });
-    this.headers = new Headers({'Content-Type': 'application/x-www-form-urlencoded'});
+    this.headers = new Headers({ 'Content-Type': 'application/json' });
+    //this.headers = new Headers({'Content-Type': 'application/x-www-form-urlencoded'});
     this.headers.append('Authorization', 'Basic ' + btoa('domobox:domoboxpw'));   
     this.options = new RequestOptions({ headers: this.headers });
   }
 
-  getPiscine(): Promise<Piscine> {
-    console.log("datapiscine=" + DATA_PISCINE);
-    return Promise.resolve(DATA_PISCINE);
-  }
   getProgrammation(): Observable<Programmation> {
     
     return this.http.get(this.programmationUrl,this.options)
@@ -39,7 +34,13 @@ export class PiscineService {
   }
   private extractData(res: Response) {
     let body = res.json();
-    return body || {};
+    if (!body) {
+      return new Programmation();
+    } else {
+      let prog = new Programmation();
+      prog.plagesHoraires = body.plagesHoraires;
+      return prog;
+    }
   }
 
   private handleError(error: Response | any) {
@@ -52,12 +53,12 @@ export class PiscineService {
     } else {
       errMsg = error.message ? error.message : error.toString();
     }
-    console.error(errMsg);
+    console.error("[piscine.service] " +errMsg);
     return Observable.throw(errMsg);
   }
 
   update(prog: Programmation) {
-    return this.http.post(this.programmationUrl, prog, this.options)
+    return this.http.post(this.programmationUrl, JSON.stringify(prog), this.options)
       .map(this.extractData)
       .catch(this.handleError);
   }

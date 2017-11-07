@@ -28,9 +28,9 @@ export class MeteoPageComponent implements OnInit {
       this.meteoData.tmin = meteo.fcst_day_0.tmin;
       this.meteoData.tmax = meteo.fcst_day_0.tmax;
       this.meteoData.condition = meteo.current_condition.condition;
-      console.log("meteo ok: " + this.meteoData.icon_big);
+      //console.log("meteo ok: " + this.meteoData.icon_big);
     }, err => {
-      console.log(err);
+      console.log("[meteo-page-component ]"+err);
     } );
   }
 

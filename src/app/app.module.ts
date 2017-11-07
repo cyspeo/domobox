@@ -16,7 +16,9 @@ import { PiscineWidgetComponent } from './piscine/piscine-widget.component';
 import { MeteoService } from './meteo/meteo.service';
 import { MeteoPageComponent } from './meteo/meteo-page.component';
 import { MeteoWidgetComponent } from './meteo/meteo-widget.component';
-import { ParamComponent } from './param/param.component';
+import { ParamComponent,NgbdModalContent } from './param/param.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+
 
 @NgModule({
   declarations: [
@@ -26,16 +28,20 @@ import { ParamComponent } from './param/param.component';
     PiscineWidgetComponent,
     MeteoPageComponent,
     MeteoWidgetComponent,
-    ParamComponent
+    ParamComponent,
+    NgbdModalContent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    NgbModule.forRoot() 
   ],
   providers: [PiscineService, MeteoService ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [NgbdModalContent]
 })
 export class AppModule { }
+2
