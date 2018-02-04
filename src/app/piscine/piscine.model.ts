@@ -15,6 +15,7 @@ export class Secteur {
 
 export class Programmation {
   plagesHoraires: Array<boolean> = [];
+  interrupteur: number;
   constructor() {
     for (var i = 0; i < 24; i++) {
      this.plagesHoraires[i] = false;

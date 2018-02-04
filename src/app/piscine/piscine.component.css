@@ -26,8 +26,13 @@
     position:relative;
     top:500px;
 }
-
-
+.bloc-interrupteur {
+    padding-right: 100px;
+    
+}
+.interrupteur {
+    background-color: #3D3D3D;
+}
 .svg-container {
 display: inline-block;
 position: relative;

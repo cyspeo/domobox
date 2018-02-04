@@ -82,7 +82,7 @@ export class PiscineComponent implements OnInit {
     //console.log("component candeactive");
     // Allow synchronous navigation (`true`) if no crisis or the crisis is unchanged
     if (this.dirty) {
-      return window.confirm('Discard changes?');      
+      return window.confirm('Discard changes?');
     } else {
       return true;
     }
@@ -136,7 +136,26 @@ export class PiscineComponent implements OnInit {
     this.dirty = false;
   }
   ngOnInit() {
-    
+
+  }
+
+  clickOn() {
+    if (this.editable) {
+      this.prog.interrupteur = 1;
+      this.dirty = true;
+    }
+  }
+  clickOff() {
+    if (this.editable) {
+      this.prog.interrupteur = 0;
+      this.dirty = true;
+    }
+  }
+  clickAuto() {
+    if (this.editable) {
+      this.prog.interrupteur = 2;
+      this.dirty = true;
+    }
   }
 
 }
