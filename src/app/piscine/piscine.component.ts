@@ -15,6 +15,8 @@ import { Secteur } from './piscine.model';
 import { Programmation } from './piscine.model';
 
 import { PiscineService } from './piscine.service';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-piscine',
@@ -52,7 +54,7 @@ export class PiscineComponent implements OnInit {
   dirty: boolean; // indique si les données ont été changée.
   errorMessage: any;
 
-  constructor(private piscineService: PiscineService, private location: Location) {
+  constructor(private piscineService: PiscineService, private location: Location, private router: Router) {
     this.editable = false;
     this.state = 'inactive';
     this.dirty = false;
@@ -72,9 +74,7 @@ export class PiscineComponent implements OnInit {
         this.prog = response;
         //console.log("response  " + JSON.stringify(response))
       },
-      error => this.errorMessage = <any>error);
-
-
+      error => this.errorMessage = <any>error);    
   }
 
 
@@ -126,6 +126,7 @@ export class PiscineComponent implements OnInit {
         .subscribe(response => {
           this.prog = response
           //console.log("response  " + JSON.stringify(response))
+          this.router.navigate(['dashboard']);
         },
         error => this.errorMessage = <any>error);
     }
@@ -134,6 +135,7 @@ export class PiscineComponent implements OnInit {
     this.editable = false;
     this.state = 'inactive';
     this.dirty = false;
+    this.router.navigate(['dashboard']);
   }
   ngOnInit() {
 

@@ -1,4 +1,23 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" >
+    <a class="navbar-brand" href="#">Domobox</a>
+    <button class="navbar-toggler" type="button"  (click)="navCollapsed = !navCollapsed"  aria-controls="navbarSupportedContent"
+      aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent" [ngbCollapse]="navCollapsed">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active" (click)="navCollapsed = !navCollapsed">
+          <a class="nav-link" routerLink="/dashboard" routerLinkActive="active">Dashboard <span class="sr-only">(Dashboard)</span></a>
+        </li>
+        <li class="nav-item" (click)="navCollapsed = !navCollapsed">
+          <a class="nav-link" routerLink="/piscine" routerLinkActive="active">Piscine <span class="sr-only">(Piscine)</span></a></li>
+        <li class="nav-item" (click)="navCollapsed = !navCollapsed">
+          <a class="nav-link" routerLink="/param" routerLinkActive="active">Paramètres <span class="sr-only">(paramètres)</span></a></li>
+      </ul>
+      </div>
+  </nav> 
 <div class="container-fluid">
+ 
 <div class="row">
   <div class="col-md-3 col-sm-6 col-xs-12">
     <app-meteo-widget></app-meteo-widget>
